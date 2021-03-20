@@ -33,66 +33,55 @@ public class NewBankClientHandler extends Thread{
 			out.println("Please enter your selection:   \n");
 
 			String selection = in.readLine();
-			int option= Integer.parseInt(selection);
+			Integer option = getSelection(selection);
 
-
-
-			boolean again = true;
-			while(again) {
-				again = false;
-				switch (option) {
-					case 1:
-
-						out.println("Enter Username");
-						String userName = in.readLine();
-						// ask for password
-						out.println("Enter Password");
-						String password = in.readLine();
-						out.println("Checking Details...");
-						// authenticate user and get customer ID token from bank for use in subsequent requests
-						CustomerID customer = bank.checkLogInDetails(userName, password);
-						// if the user is authenticated then get requests from the user and process themm
-						if (customer != null) {
-							out.println("Log In Successful. What do you want to do?");
-							while (true) {
-								String request = in.readLine();
-								System.out.println("Request from " + customer.getKey());
-								String response = bank.processRequest(customer, request);
-								out.println(response);
-							}
-						} else {
-							out.println("Log In Failed");
+			switch (option) {
+				case 1:
+					out.println("Enter Username");
+					String userName = in.readLine();
+					// ask for password
+					out.println("Enter Password");
+					String password = in.readLine();
+					out.println("Checking Details...");
+					// authenticate user and get customer ID token from bank for use in subsequent requests
+					CustomerID customer = bank.checkLogInDetails(userName, password);
+					// if the user is authenticated then get requests from the user and process themm
+					if (customer != null) {
+						out.println("Log In Successful. What do you want to do?");
+						while (true) {
+							String request = in.readLine();
+							System.out.println("Request from " + customer.getKey());
+							String response = bank.processRequest(customer, request);
+							out.println(response);
 						}
+					} else {
+						out.println("Log In Failed");
+					}
 
-						break;
+					break;
 
-					// ------------- END OF OPTION 1 -------------------
+				// ------------- END OF OPTION 1 -------------------
 
-					case 2:
-						// Get a new account name
-						out.println("Please enter your name");
-						String customerName = in.readLine();
+				case 2:
+					// Get a new account name
+					out.println("Please enter your name");
+					String customerName = in.readLine();
 
-						out.println("Please enter the type of account you want ");
-						String accountName = in.readLine();
+					out.println("Please enter the type of account you want ");
+					String accountName = in.readLine();
 
-						out.println("Please enter the initial amount you with to deposit");
-						String openingBalance = in.readLine();
-						double balance = Double.parseDouble(openingBalance);
+					out.println("Please enter the initial amount you with to deposit");
+					String openingBalance = in.readLine();
+					double balance = Double.parseDouble(openingBalance);
 
-						Account newAccount = new Account(accountName,balance);
+					Account newAccount = new Account(accountName,balance);
+					break;
 
+				default:
+					break;
 
-						break;
-
-					default:
-						out.println("Please make another selection");
-						String o = in.readLine();
-						again =true;
-						break;
-
-				}
 			}
+
 
 
 
@@ -117,4 +106,38 @@ public class NewBankClientHandler extends Thread{
 		}
 	}
 
+
+	/** Takes the clients input, determines if the selection is appropriate and then either returns the selection
+	 * as an integer value or asks the client to make another selection attempt.
+	 * @param selection
+	 * @return option (interger)
+	 */
+
+	private Integer getSelection(String selection){
+
+			if(selection.equals("1") || selection.equals("2")) {
+				Integer option = Integer.parseInt(selection);
+				return option;
+			}else {
+				out.println("Sorry - your selection was not recognised\n");
+				out.println("Please try again");
+					try {
+						selection = in.readLine();
+						return getSelection(selection);
+					} catch (IOException e) {
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
+
+			}
+
+		return null;
+	}
+
+
+
+
 }
+
+
+
