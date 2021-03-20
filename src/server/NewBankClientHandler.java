@@ -36,6 +36,7 @@ public class NewBankClientHandler extends Thread{
 			Integer option = getSelection(selection);
 
 			switch (option) {
+				// -------------  OPTION 1 -------------------
 				case 1:
 					out.println("Enter Username");
 					String userName = in.readLine();
@@ -60,8 +61,7 @@ public class NewBankClientHandler extends Thread{
 
 					break;
 
-				// ------------- END OF OPTION 1 -------------------
-
+				// ------------- OPTION 2 -------------------
 				case 2:
 					// Get a new account name
 					out.println("Please enter your name");
@@ -80,13 +80,7 @@ public class NewBankClientHandler extends Thread{
 				default:
 					break;
 
-			}
-
-
-
-
-
-
+				}
 
 		} catch (IOException e) {
 
