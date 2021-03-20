@@ -69,10 +69,25 @@ public class NewBankClientHandler extends Thread{
 					// ------------- END OF OPTION 1 -------------------
 
 					case 2:
-						out.println("Work in progress...");
+						// Get a new account name
+						out.println("Please enter your name");
+						String customerName = in.readLine();
+
+						out.println("Please enter the type of account you want ");
+						String accountName = in.readLine();
+
+						out.println("Please enter the initial amount you with to deposit");
+						String openingBalance = in.readLine();
+						double balance = Double.parseDouble(openingBalance);
+
+						Account newAccount = new Account(accountName, openingBalance);
+
+
 						break;
 
 					default:
+						out.println("Please make another selection");
+						String o = in.readLine();
 						again =true;
 						break;
 
