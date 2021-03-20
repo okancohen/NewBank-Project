@@ -80,7 +80,7 @@ public class NewBankClientHandler extends Thread{
 						String openingBalance = in.readLine();
 						double balance = Double.parseDouble(openingBalance);
 
-						Account newAccount = new Account(accountName, openingBalance);
+						Account newAccount = new Account(accountName,balance);
 
 
 						break;
