@@ -52,4 +52,10 @@ public class NewBank {
 		return (customers.get(customer.getKey())).accountsToString();
 	}
 
+
+	// simply check if customer already had an account.
+	public boolean checkIfAccount(String customer){
+		return customers.containsKey(customer);
+	}
+
 }

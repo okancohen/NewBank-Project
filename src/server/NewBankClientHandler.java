@@ -64,8 +64,10 @@ public class NewBankClientHandler extends Thread{
 				// ------------- OPTION 2 -------------------
 				case 2:
 					// Get a new account name
-					out.println("Please enter your name");
-					String customerName = in.readLine();
+					out.println("Please enter a username for yourself");
+					String newUserName = in.readLine();
+
+					String newCustomer = checkNewUserName(newUserName);
 
 					out.println("Please enter the type of account you want ");
 					String accountName = in.readLine();
@@ -126,6 +128,28 @@ public class NewBankClientHandler extends Thread{
 			}
 
 		return null;
+	}
+
+	/** Takes checks if the client already has an ccount, or the username is already being used.
+	 * @param newUserName
+	 * @return newUserName
+	 */
+	private String checkNewUserName(String newUserName){
+
+		if(bank.checkIfAccount(newUserName)) {
+			out.println("This username already exists");
+			out.println("Please try provide a different username");
+			try {
+				newUserName = in.readLine();
+				return checkNewUserName(newUserName);
+			} catch (IOException e) {
+				e.printStackTrace();
+				Thread.currentThread().interrupt();
+			}
+		}
+
+		return newUserName;
+
 	}
 
 
