@@ -76,7 +76,13 @@ public class NewBankClientHandler extends Thread{
 					String openingBalance = in.readLine();
 					double balance = Double.parseDouble(openingBalance);
 
+					out.println("Please add a password to your account");
+					String pw = in.readLine();
+
+
 					Account newAccount = new Account(accountName,balance);
+
+
 					break;
 
 				default:

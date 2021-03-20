@@ -15,6 +15,7 @@ public class NewBank {
 	private void addTestData() {
 		Customer bhagy = new Customer();
 		bhagy.addAccount(new Account("Main", 1000.0));
+		bhagy.setPassword("password");
 		customers.put("Bhagy", bhagy);
 		
 		Customer christina = new Customer();
@@ -31,7 +32,7 @@ public class NewBank {
 	}
 	
 	public synchronized CustomerID checkLogInDetails(String userName, String password) {
-		if(customers.containsKey(userName)) {
+		if(customers.containsKey(userName) && customers.get(userName).correctPassword(password)){
 			return new CustomerID(userName);
 		}
 		return null;
