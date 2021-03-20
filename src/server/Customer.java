@@ -28,6 +28,7 @@ public class Customer {
 		this.password = password;
 	}
 
+	// check the password is correct when entered.
 	public boolean correctPassword(String password){
 		return this.password.equals(password);
 	}
