@@ -1,11 +1,17 @@
 package server;
 
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class NewBank {
 	
 	private static final NewBank bank = new NewBank();
 	private HashMap<String,Customer> customers;
+	private String action = "";
+	private String acc = "";
+	private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+	private double amount;
 	
 	private NewBank() {
 		customers = new HashMap<>();
@@ -44,6 +50,10 @@ public class NewBank {
 	public synchronized String processRequest(CustomerID customer, String request) {
 		if(customers.containsKey(customer.getKey())) {
 
+			if(action.length()>1 && acc.length()>1 && isNumeric(request)) {
+				amount = Double.parseDouble(request);
+				request ="AMOUNT";
+			}
 
 
 			switch(request) {
@@ -51,8 +61,13 @@ public class NewBank {
 					return showMyAccounts(customer);
 
 				case "DEPOSIT":
-
-					return "How much would you like to ...";
+					action+="deposit";
+					return "Into which account would you like to " + action;
+				case "MAIN":
+					acc+="main";
+					return "How much would you like to " + action + " into your " + acc + " account";
+				case "AMOUNT":
+					return applyToAccount(customer, action, acc, amount);
 
 
 			default : return "FAIL";
@@ -69,6 +84,36 @@ public class NewBank {
 	// simply check if customer already had an account.
 	public boolean checkIfAccount(String customer){
 		return customers.containsKey(customer);
+	}
+
+	// check if the request is in a numeric form.
+	private boolean isNumeric(String strNum) {
+		if (strNum == null) {
+			return false;
+		}
+		return pattern.matcher(strNum).matches();
+	}
+
+
+
+
+
+	private String applyToAccount(CustomerID customer, String action, String acc, Double amount){
+		Account account = customers.get(customer.getKey()).getAccounts()
+				.stream()
+				.filter(a -> Objects.equals(a.getAccountName().toLowerCase(), acc.toLowerCase()))
+				.findAny()
+				.orElse(null);
+
+		if (action.equals("deposit")){
+			account.depositMoney(amount);
+			action = "deposited into";
+		}else if (action.equals("withdraw")){
+			account.withdrawMoney(amount);
+			action = "withdrawn from";
+		}
+
+		return "Your have " + action +  " " + amount + " your " + acc + " account + \nYour balance is now " + account.getBalance();
 	}
 
 
