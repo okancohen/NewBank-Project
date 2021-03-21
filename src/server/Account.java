@@ -4,6 +4,7 @@ public class Account {
 	
 	private String accountName;
 	private double openingBalance;
+	private double mySavingsGoal;
 
 	public Account(String accountName, double openingBalance) {
 		this.accountName = accountName;
@@ -27,7 +28,9 @@ public class Account {
 		return this.accountName;
 	}
 
-
+	pubic void setSavingsGoal(double savingsGoal){
+		this.mySavingsGoal == savingsGoal;	
+	}
 
 
 
