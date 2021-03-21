@@ -54,6 +54,10 @@ public class NewBankClientHandler extends Thread{
 							System.out.println("Request from " + customer.getKey());
 							String response = bank.processRequest(customer, request);
 							out.println(response);
+							if(response.equals("FAIL")){
+								out.println("Sorry - your request was not recognised");
+								out.println("Please try again");
+							}
 						}
 					} else {
 						out.println("Log In Failed");
