@@ -6,9 +6,10 @@ public class Account {
 	private double openingBalance;
 	private double mySavingsGoal;
 
-	public Account(String accountName, double openingBalance) {
+	public Account(String accountName, double openingBalance, double mySavingsGoal) {
 		this.accountName = accountName;
 		this.openingBalance = openingBalance;
+		this.mySavingsGoal = mySavingsGoal;
 	}
 	
 	public String toString() {
@@ -28,9 +29,7 @@ public class Account {
 		return this.accountName;
 	}
 
-	pubic void setSavingsGoal(double savingsGoal){
-		this.mySavingsGoal == savingsGoal;	
-	}
+	
 
 
 
