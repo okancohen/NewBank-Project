@@ -43,8 +43,18 @@ public class NewBank {
 	// commands from the NewBank customer are processed in this method
 	public synchronized String processRequest(CustomerID customer, String request) {
 		if(customers.containsKey(customer.getKey())) {
+
+
+
 			switch(request) {
-			case "SHOWMYACCOUNTS" : return showMyAccounts(customer);
+				case "SHOWMYACCOUNTS" :
+					return showMyAccounts(customer);
+
+				case "DEPOSIT":
+
+					return "How much would you like to ...";
+
+
 			default : return "FAIL";
 			}
 		}
@@ -60,5 +70,11 @@ public class NewBank {
 	public boolean checkIfAccount(String customer){
 		return customers.containsKey(customer);
 	}
+
+
+	public boolean
+
+
+
 
 }

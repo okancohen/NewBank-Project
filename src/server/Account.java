@@ -15,6 +15,18 @@ public class Account {
 	}
 
 
+	public void depositMoney(double amount ){
+		this.openingBalance += amount;
+	}
+
+	public void withdrawMoney(double amount){
+		this.openingBalance -= amount;
+	}
+
+	public String getAccountName(String accountName){
+		return this.accountName;
+	}
+
 
 
 
