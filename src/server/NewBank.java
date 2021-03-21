@@ -63,7 +63,7 @@ public class NewBank {
 				return "FAIL";
 			}
 
-			// Reset the actions.
+		
 			if(transfer_sequence.equals(1)){
 				acc.add(request.toLowerCase());
 				action.add("transfer2");
