@@ -126,6 +126,20 @@ public class NewBank {
 						}
 					}
 
+				case "SHOWMYTRANSACTIONS":
+						String s= "\n";
+						for (int row =0; row < action.size(); row++) {
+							try {
+								s += (String.format("%20s %20s %20s", acc.get(row), action.get(row), amount.get(row)) + "\n");
+							} catch (Exception e){
+								break;
+							}
+						}
+						return s  + "\n Do you want to use another service? " ;
+
+
+
+
 
 			default : return "FAIL";
 			}
@@ -200,6 +214,10 @@ public class NewBank {
 				"Do you want to use another service?";
 
 	}
+
+
+
+
 
 
 
