@@ -16,7 +16,7 @@ public class NewBank {
 	private Integer transfer_sequence = 0;
 
 
-	private NewBank() {
+	public NewBank() {
 		customers = new HashMap<>();
 		addTestData();
 	}
@@ -63,7 +63,7 @@ public class NewBank {
 				return "FAIL";
 			}
 
-		
+
 			if(transfer_sequence.equals(1)){
 				acc.add(request.toLowerCase());
 				action.add("transfer2");
