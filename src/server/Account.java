@@ -25,11 +25,15 @@ public class Account {
 		this.openingBalance -= amount;
 	}
 
-	public String getAccountName(String accountName){
+	public String getAccountName(){
 		return this.accountName;
 	}
 
-	
+
+	public double getBalance(){ return this.openingBalance;}
+
+
+
 
 
 
