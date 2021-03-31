@@ -41,7 +41,12 @@ public class Account {
 	public void updatemySavingsGoal(double newGoal){
 		this.mySavingsGoal == newGoal;
 	}
-
+	
+	//Find remaining amount to deposit before savingsGoal is reached
+	
+	public double remaindertoSavingsGoal(){
+		return this.mySavingsGoal - openingBalance;
+	}
 
 
 
