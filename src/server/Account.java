@@ -35,7 +35,12 @@ public class Account {
 	//show current savings goal
 	
 	public double getSavingsGoal(){ return this.mySavingsGoal;}
-
+	
+	//change or update mySavingsGoal
+	
+	public void updatemySavingsGoal(double newGoal){
+		this.mySavingsGoal == newGoal;
+	}
 
 
 
