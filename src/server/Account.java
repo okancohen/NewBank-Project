@@ -31,6 +31,10 @@ public class Account {
 
 
 	public double getBalance(){ return this.openingBalance;}
+	
+	//show current savings goal
+	
+	public double getSavingsGoal(){ return this.mySavingsGoal;}
 
 
 
