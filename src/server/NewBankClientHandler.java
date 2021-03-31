@@ -29,6 +29,8 @@ public class NewBankClientHandler extends Thread{
 			out.println("Do you want to:                \n");
 			out.println("1. Login to your account       \n");
 			out.println("2. Create a new account        \n");
+			//FR12 'More Info' for potential clients
+			out.println("3. Learn more about NewBank servvices        \n");
 			out.println(" ----------------------------- \n");
 			out.println("Please enter your selection:   \n");
 
@@ -86,6 +88,14 @@ public class NewBankClientHandler extends Thread{
 
 					Account newAccount = new Account(accountName,balance);
 
+
+					break;
+					
+				// ------------- OPTION 3 - Learn more about NewBank Services -------------------
+				case 3:
+					// Get a new account name
+					out.println("Welcome to NewBank! NewBank is one of the country's largest banks and we are now proud to start offering our services online.");
+					out.println("You can now complete a range of online services from account creation to transfers and more! We look forward to having you as a client. For more information you can call us directly at 800-xxx-xxxx");
 
 					break;
 
