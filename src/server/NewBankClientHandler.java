@@ -72,6 +72,17 @@ public class NewBankClientHandler extends Thread{
 					String newUserName = in.readLine();
 
 					String newCustomer = checkNewUserName(newUserName);
+					
+					//Grab user contact information (start with email address for now - FR9)
+					
+					out.println("Please enter your email address");
+					String newEmailAddress = in.readLine();
+					
+					//check if email address valid - i.e not used before - unfinished: complete this method below and re-comment this
+					
+					String newCustomerEmail = checkNewEmail(newEmailAddress);
+					
+					//Add more contact information as needed - email satisfactory for now
 
 					out.println("Please enter the type of account you want ");
 					String accountName = in.readLine();
