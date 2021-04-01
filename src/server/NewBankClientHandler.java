@@ -170,6 +170,27 @@ public class NewBankClientHandler extends Thread{
 		}
 
 		return newUserName;
+		
+	//Checks if email address is valid (was not previously used for regsitration - ie does not exist in database)
+		
+	private String checkNewEmail(String newEmailAddress){
+		
+		//go back to class and add the respective method
+		
+		if(bank.checkIfEmail(newEmailAddress)) {
+			out.println("This email address is already used to create a NewBank Account");
+			out.println("Please provide a different email address or log in using your username and password");
+			try {
+				newEmailAddress = in.readLine();
+				return checkNewEmail(newEmailAddress);
+			} catch (IOException em) {
+				em.printStackTrace();
+				Thread.currentThread().interrupt();
+			
+			} 
+		}
+		
+		}	
 
 	}
 
