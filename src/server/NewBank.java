@@ -24,7 +24,7 @@ public class NewBank {
 	private void addTestData() {
 		Customer bhagy = new Customer();
 		bhagy.addAccount(new Account("Current", 1000.0));
-		bhagy.addAccount(new Account("Savings", 800.0));
+		bhagy.addAccount(new Account("Savings", 800,5000));
 		bhagy.setPassword("password");
 		customers.put("Bhagy", bhagy);
 		
@@ -33,7 +33,7 @@ public class NewBank {
 		customers.put("Christina", christina);
 		
 		Customer john = new Customer();
-		john.addAccount(new Account("Current", 250.0));
+		john.addAccount(new Account("Current", 250,0));
 		customers.put("John", john);
 	}
 	
@@ -184,7 +184,7 @@ public class NewBank {
 			action = "withdrawn from";
 		}
 
-		return "Your have " + action +  " " + amount + " your " + acc + " account\n " +
+		return "You have " + action +  " " + amount + " your " + acc + " account\n " +
 				"Your balance is now " + account.getBalance() + "\n\n" +
 				"Do you want to use another service?";
 	}
