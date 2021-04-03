@@ -38,13 +38,13 @@ public class Account {
 	
 	//change or update mySavingsGoal
 	
-	public void updatemySavingsGoal(double newGoal){
+	public void updateMySavingsGoal(double newGoal){
 		this.mySavingsGoal == newGoal;
 	}
 	
 	//Find remaining amount to deposit before savingsGoal is reached
 	
-	public double remaindertoSavingsGoal(){
+	public double remainderToSavingsGoal(){
 		return this.mySavingsGoal - openingBalance;
 	}
 
