@@ -29,7 +29,7 @@ public class NewBank {
 		customers.put("Bhagy", bhagy);
 		
 		Customer christina = new Customer();
-		christina.addAccount(new Account("Savings", 1500.0, 3000)); // add savings goal for chirstina's savings account //
+		christina.addAccount(new Account("Savings", 1500.0, 3000)); // add savings goal for christina's savings account //
 		customers.put("Christina", christina);
 		
 		Customer john = new Customer();
@@ -46,6 +46,11 @@ public class NewBank {
 			return new CustomerID(userName);
 		}
 		return null;
+	}
+
+	// Method for adding new customer to bank db
+	public void addCustomerToBank(String accountName, Customer customer){
+		customers.put(accountName, customer);
 	}
 
 	// commands from the NewBank customer are processed in this method
@@ -215,8 +220,9 @@ public class NewBank {
 
 	}
 
-
-
+	public boolean checkIfEmail(String emailAddress){
+		return true;
+	}
 
 
 

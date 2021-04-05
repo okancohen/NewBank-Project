@@ -5,6 +5,8 @@ public class Account {
 	private String accountName;
 	private double openingBalance;
 	private double mySavingsGoal;
+	private String address;
+	private String phoneNumber;
 
 	public Account(String accountName, double openingBalance) {
 		this.accountName = accountName;
@@ -16,7 +18,15 @@ public class Account {
 		this.openingBalance = openingBalance;
 		this.mySavingsGoal = mySavingsGoal;
 	}
-	
+	//Overloaded constructor to deal with extra information provided when account is opened by customer
+	public Account(String accountName, double openingBalance, double mySavingsGoal, String address, String phoneNumber) {
+		this.accountName = accountName;
+		this.openingBalance = openingBalance;
+		this.mySavingsGoal = mySavingsGoal;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+	}
+
 	public String toString() {
 		return (accountName + ": " + openingBalance);
 	}
