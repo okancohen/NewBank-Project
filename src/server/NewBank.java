@@ -1,9 +1,8 @@
 package server;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class NewBank {
 	
@@ -24,17 +23,18 @@ public class NewBank {
 	private void addTestData() {
 		Customer bhagy = new Customer();
 		bhagy.addAccount(new Account("Current", 1000.0));
-		bhagy.addAccount(new Account("Savings", 800,5000));
+		bhagy.addAccount(new Account("Savings", 800,5000, "bhagy@gmail.com"));
 		bhagy.setPassword("password");
 		customers.put("Bhagy", bhagy);
 		
 		Customer christina = new Customer();
-		christina.addAccount(new Account("Savings", 1500.0, 3000)); // add savings goal for christina's savings account //
+		christina.addAccount(new Account("Savings", 1500.0, 3000, "christina@gmail.com")); // add savings goal for christina's savings account //
 		customers.put("Christina", christina);
 		
 		Customer john = new Customer();
-		john.addAccount(new Account("Current", 250,0));
+		john.addAccount(new Account("Current", 250,0, "john@gmail.com"));
 		customers.put("John", john);
+
 	}
 	
 	public static NewBank getBank() {
@@ -221,7 +221,20 @@ public class NewBank {
 	}
 
 	public boolean checkIfEmail(String emailAddress){
-		return true;
+		//This method needs to check if email address already taken
+		for (Map.Entry<String, Customer> entry : customers.entrySet()){
+			//In each HashMap entry grab the customer object
+			Customer tempCustomer = entry.getValue();
+			//When you have the Customer object, grab all accounts from that customer
+			ArrayList<Account> accountIterator = tempCustomer.getAccounts();
+			//Check each account whether the email address is the same as the param
+			for (Account accounts : accountIterator){
+				if(emailAddress.equals(accounts.getEmailAddress())){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NewBankClientHandler extends Thread{
 	
@@ -104,7 +106,7 @@ public class NewBankClientHandler extends Thread{
 
 					//Account newAccount = new Account(accountName, balance, 0, address, phoneNumber);
 					Customer joiningCustomer = new Customer();
-					joiningCustomer.addAccount(new Account(accountName, balance, 0, address, phoneNumber));
+					joiningCustomer.addAccount(new Account(accountName, balance, 0, address, phoneNumber, newCustomerEmail));
 					bank.addCustomerToBank(accountName, joiningCustomer);
 
 					break;
@@ -206,8 +208,24 @@ public class NewBankClientHandler extends Thread{
 				Thread.currentThread().interrupt();
 			
 			} 
+		} else {
+
+			String REGEX = "^(.+)@(.+)$";
+			Pattern emailPattern = Pattern.compile(REGEX);
+			Matcher validEmail = emailPattern.matcher(newEmailAddress);
+
+			while(!validEmail.matches()){
+				try{
+					out.println("The inserted email is not valid, please enter a new one");
+					newEmailAddress = in.readLine();
+					validEmail = emailPattern.matcher(newEmailAddress);
+				} catch (IOException emailInput){
+					emailInput.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
+			}
 		}
-		return "null";
+		return newEmailAddress;
 	}
 
 }
