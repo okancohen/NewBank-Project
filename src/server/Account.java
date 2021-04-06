@@ -59,7 +59,7 @@ public class Account {
 
 	public void changeOverdraft(double amount ){
 		this.overdraft = amount;
-	} //TODO make this useable
+	} //TODO make this use-able
 
 	public void withdrawMoney(double amount){
 		if (this.openingBalance + this.overdraft <= amount) {
@@ -84,7 +84,7 @@ public class Account {
 	//change or update mySavingsGoal
 	
 	public void updateMySavingsGoal(double newGoal){
-		this.mySavingsGoal == newGoal;
+		this.mySavingsGoal = newGoal;
 	}
 	
 	//Find remaining amount to deposit before savingsGoal is reached

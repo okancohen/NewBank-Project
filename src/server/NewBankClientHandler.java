@@ -25,104 +25,111 @@ public class NewBankClientHandler extends Thread{
 	public void run() {
 		// keep getting requests from the client and processing them
 		try {
-			// ask for user name
 
 			out.println(" ---- Welcome to NewBank ---- \n");
-			out.println("Do you want to:                \n");
-			out.println("1. Login to your account       \n");
-			out.println("2. Create a new account        \n");
-			//FR12 'More Info' for potential clients
-			out.println("3. Learn more about NewBank servvices        \n");
-			out.println(" ----------------------------- \n");
-			out.println("Please enter your selection:   \n");
+			// Print the menu of options
+			printMenu();
+			
+			// wrap options within loop.
+			// optionLoop - label for the break statement
+			optionLoop: while(true) {
 
-			String selection = in.readLine();
-			Integer option = getSelection(selection);
+				String selection = in.readLine();
+				Integer option = getSelection(selection);
 
-			switch (option) {
-				// -------------  OPTION 1 -------------------
-				case 1:
-					out.println("Enter Username");
-					String userName = in.readLine();
-					// ask for password
-					out.println("Enter Password");
-					String password = in.readLine();
-					out.println("Checking Details...");
-					// authenticate user and get customer ID token from bank for use in subsequent requests
-					CustomerID customer = bank.checkLogInDetails(userName, password);
-					// if the user is authenticated then get requests from the user and process themm
-					if (customer != null) {
-						out.println("Log In Successful. What do you want to do?");
-						while (true) {
-							String request = in.readLine();
-							System.out.println("Request from " + customer.getKey());
-							String response = bank.processRequest(customer, request);
-							out.println(response);
-							if(response.equals("FAIL")){
-								out.println("Sorry - your request was not recognised");
-								out.println("Please try again");
+				switch (option) {
+					// -------------  OPTION 1 -------------------
+					case 1:
+						out.println("Enter Username");
+						String userName = in.readLine();
+						// ask for password
+						out.println("Enter Password");
+						String password = in.readLine();
+						out.println("Checking Details...");
+						// authenticate user and get customer ID token from bank for use in subsequent requests
+						CustomerID customer = bank.checkLogInDetails(userName, password);
+						// if the user is authenticated then get requests from the user and process themm
+						if (customer != null) {
+							out.println("Log In Successful. What do you want to do?");
+							while (true) {
+								String request = in.readLine();
+								System.out.println("Request from " + customer.getKey());
+								String response = bank.processRequest(customer, request);
+								out.println(response);
+								if (response.equals("FAIL")) {
+									out.println("Sorry - your request was not recognised");
+									out.println("Please try again");
+								}
 							}
+						} else {
+							out.println("Log In Failed");
 						}
-					} else {
-						out.println("Log In Failed");
-					}
 
-					break;
+						break;
 
-				// ------------- OPTION 2 -------------------
-				case 2:
-					// Get a new account name
-					out.println("Please enter a username for yourself");
-					String newUserName = in.readLine();
+					// ------------- OPTION 2 -------------------
+					case 2:
+						// Get a new account name
+						out.println("Please enter a username for yourself");
+						String newUserName = in.readLine();
 
-					String newCustomer = checkNewUserName(newUserName);
-					
-					//Grab user contact information (start with email address for now - FR9)
-					
-					out.println("Please enter your email address");
-					String newEmailAddress = in.readLine();
-					
-					//check if email address valid - i.e not used before - unfinished: complete this method below and re-comment this
-					
-					String newCustomerEmail = checkNewEmail(newEmailAddress);
-					
-					//Add more contact information as needed - email satisfactory for now
+						String newCustomer = checkNewUserName(newUserName);
 
-					out.println("Please enter the type of account you want ");
-					String accountName = in.readLine();
+						//Grab user contact information (start with email address for now - FR9)
 
-					out.println("Please enter the initial amount you wish to deposit");
-					String openingBalance = in.readLine();
-					double balance = Double.parseDouble(openingBalance);
+						out.println("Please enter your email address");
+						String newEmailAddress = in.readLine();
 
-					out.println("Please add a password to your account");
-					String pw = in.readLine();
+						//check if email address valid - i.e not used before - unfinished: complete this method below and re-comment this
 
-					out.println("Please add your home address to your account");
-					String address = in.readLine();
+						String newCustomerEmail = checkNewEmail(newEmailAddress);
 
-					out.println("Please add your phone number to your account");
-					String phoneNumber = in.readLine();
+						//Add more contact information as needed - email satisfactory for now
 
-					//Account newAccount = new Account(accountName, balance, 0, address, phoneNumber);
-					Customer joiningCustomer = new Customer();
-					joiningCustomer.addAccount(new Account(accountName, balance, 0, address, phoneNumber, newCustomerEmail));
-					bank.addCustomerToBank(accountName, joiningCustomer);
+						out.println("Please enter the type of account you want ");
+						String accountName = in.readLine();
 
-					break;
-					
-				// ------------- OPTION 3 - Learn more about NewBank Services -------------------
-				case 3:
-					// Get a new account name
-					out.println("Welcome to NewBank! NewBank is one of the country's largest banks and we are now proud to start offering our services online.");
-					out.println("You can now complete a range of online services from account creation to transfers and more! We look forward to having you as a client. For more information you can call us directly at 800-xxx-xxxx");
+						out.println("Please enter the initial amount you wish to deposit");
+						String openingBalance = in.readLine();
+						double balance = Double.parseDouble(openingBalance);
 
-					break;
+						out.println("Please add a password to your account");
+						String pw = in.readLine();
 
-				default:
-					break;
+						out.println("Please add your home address to your account");
+						String address = in.readLine();
+
+						out.println("Please add your phone number to your account");
+						String phoneNumber = in.readLine();
+
+						//Account newAccount = new Account(accountName, balance, 0, address, phoneNumber);
+						Customer joiningCustomer = new Customer();
+						joiningCustomer.addAccount(new Account(accountName, balance, 0, address, phoneNumber, newCustomerEmail));
+						bank.addCustomerToBank(accountName, joiningCustomer);
+
+						break;
+
+					// ------------- OPTION 3 - Learn more about NewBank Services -------------------
+					case 3:
+						// Get a new account name
+						out.println("Welcome to NewBank! NewBank is one of the country's largest banks and we are now proud to start offering our services online.");
+						out.println("You can now complete a range of online services from account creation to transfers and more! \n " +
+								"We look forward to having you as a client.  \n" +
+								"For more information you can call us directly at 800-xxx-xxxx \n " +
+								" ----------------------------- \n" +
+								"Please select another option from the menu: \n");
+						// restart the welcome statement
+						printMenu();
+
+						break;
+
+
+					default:
+						break optionLoop;
 
 				}
+
+			}
 
 		} catch (IOException e) {
 
@@ -151,7 +158,7 @@ public class NewBankClientHandler extends Thread{
 
 	private Integer getSelection(String selection){
 
-			if(selection.equals("1") || selection.equals("2")) {
+			if(selection.equals("1") || selection.equals("2") || selection.equals("3")) {
 				Integer option = Integer.parseInt(selection);
 				return option;
 			}else {
@@ -227,6 +234,23 @@ public class NewBankClientHandler extends Thread{
 		}
 		return newEmailAddress;
 	}
+
+
+
+	private void printMenu(){
+
+
+		out.println("Do you want to:                \n");
+		out.println("1. Login to your account       \n");
+		out.println("2. Create a new account        \n");
+		//FR12 'More Info' for potential clients
+		out.println("3. Learn more about NewBank services        \n");
+		out.println(" ----------------------------- \n");
+		out.println("Please enter your selection:   \n");
+
+
+	}
+
 
 }
 
