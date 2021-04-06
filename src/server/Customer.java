@@ -25,7 +25,25 @@ public class Customer {
 
 	// Set a password for the customer to access accounts.
 	public void setPassword(String password){
-		this.password = password;
+		int length = password.length();
+		boolean hasUpperCase = !password.equals(password.toLowerCase());
+		boolean hasLowercase = !password.equals(password.toUpperCase());
+
+		if (length < 6 ) {
+			System.out.println("Your password is too short");
+		}
+		else if (!hasUpperCase) {
+			System.out.println("Your password needs at least one upper case character");
+		}
+
+		else if (!hasLowercase) {
+			System.out.println("Your password needs at least one lower case letter");
+		}
+
+			//TODO able to read password
+		else {
+			this.password = password;
+		}
 	}
 
 	// check the password is correct when entered.

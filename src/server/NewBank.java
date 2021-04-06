@@ -22,7 +22,7 @@ public class NewBank {
 	
 	private void addTestData() {
 		Customer bhagy = new Customer();
-		bhagy.addAccount(new Account("Current", 1000.0));
+		bhagy.addAccount(new Account("Current", 1000.0, 0, 300));
 		bhagy.addAccount(new Account("Savings", 800,5000, "bhagy@gmail.com"));
 		bhagy.setPassword("password");
 		customers.put("Bhagy", bhagy);

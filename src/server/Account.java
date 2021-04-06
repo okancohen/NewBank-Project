@@ -5,19 +5,30 @@ public class Account {
 	private String accountName;
 	private double openingBalance;
 	private double mySavingsGoal;
+	private double overdraft;
 	private String address;
 	private String phoneNumber;
 	private String emailAddress;
 
+
 	public Account(String accountName, double openingBalance) {
 		this.accountName = accountName;
 		this.openingBalance = openingBalance;
+		this.overdraft = 0;
 	}
 
 	public Account(String accountName, double openingBalance, double mySavingsGoal) {
 		this.accountName = accountName;
 		this.openingBalance = openingBalance;
 		this.mySavingsGoal = mySavingsGoal;
+		this.overdraft = 0;
+	}
+
+	public Account(String accountName, double openingBalance, double mySavingsGoal, double overdraft) {
+		this.accountName = accountName;
+		this.openingBalance = openingBalance;
+		this.mySavingsGoal = mySavingsGoal;
+		this.overdraft = overdraft;
 	}
 	//Overloaded constructor just for the email addition to existing accounts in db
 	public Account(String accountName, double openingBalance, double mySavingsGoal, String emailAddress) {
@@ -46,8 +57,12 @@ public class Account {
 		this.openingBalance += amount;
 	}
 
+	public void changeOverdraft(double amount ){
+		this.overdraft = amount;
+	} //TODO make this useable
+
 	public void withdrawMoney(double amount){
-		if (this.openingBalance <= amount) {
+		if (this.openingBalance + this.overdraft <= amount) {
 			//TODO add text output when not possible to withdraw
 			//Print statement doesn't work as it is returning to New Bank (check this out. its lovely.)
 		} else {
