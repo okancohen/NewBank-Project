@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NewBankClientHandler extends Thread{
 	
@@ -25,7 +27,7 @@ public class NewBankClientHandler extends Thread{
 		try {
 			// ask for user name
 
-			out.println(" ---- Wellcome to NewBank ---- \n");
+			out.println(" ---- Welcome to NewBank ---- \n");
 			out.println("Do you want to:                \n");
 			out.println("1. Login to your account       \n");
 			out.println("2. Create a new account        \n");
@@ -89,16 +91,23 @@ public class NewBankClientHandler extends Thread{
 					out.println("Please enter the type of account you want ");
 					String accountName = in.readLine();
 
-					out.println("Please enter the initial amount you with to deposit");
+					out.println("Please enter the initial amount you wish to deposit");
 					String openingBalance = in.readLine();
 					double balance = Double.parseDouble(openingBalance);
 
 					out.println("Please add a password to your account");
 					String pw = in.readLine();
 
+					out.println("Please add your home address to your account");
+					String address = in.readLine();
 
-					Account newAccount = new Account(accountName,balance);
+					out.println("Please add your phone number to your account");
+					String phoneNumber = in.readLine();
 
+					//Account newAccount = new Account(accountName, balance, 0, address, phoneNumber);
+					Customer joiningCustomer = new Customer();
+					joiningCustomer.addAccount(new Account(accountName, balance, 0, address, phoneNumber, newCustomerEmail));
+					bank.addCustomerToBank(accountName, joiningCustomer);
 
 					break;
 					
@@ -161,13 +170,13 @@ public class NewBankClientHandler extends Thread{
 		return null;
 	}
 
-	/** Takes checks if the client already has an ccount, or the username is already being used.
+	/** Takes checks if the client already has an account, or the username is already being used.
 	 * @param newUserName
 	 * @return newUserName
 	 */
-	private String checkNewUserName(String newUserName){
+	private String checkNewUserName(String newUserName) {
 
-		if(bank.checkIfAccount(newUserName)) {
+		if (bank.checkIfAccount(newUserName)) {
 			out.println("This username already exists");
 			out.println("Please try provide a different username");
 			try {
@@ -180,6 +189,7 @@ public class NewBankClientHandler extends Thread{
 		}
 
 		return newUserName;
+	}
 		
 	//Checks if email address is valid (was not previously used for regsitration - ie does not exist in database)
 		
@@ -198,14 +208,25 @@ public class NewBankClientHandler extends Thread{
 				Thread.currentThread().interrupt();
 			
 			} 
+		} else {
+
+			String REGEX = "^(.+)@(.+)$";
+			Pattern emailPattern = Pattern.compile(REGEX);
+			Matcher validEmail = emailPattern.matcher(newEmailAddress);
+
+			while(!validEmail.matches()){
+				try{
+					out.println("The inserted email is not valid, please enter a new one");
+					newEmailAddress = in.readLine();
+					validEmail = emailPattern.matcher(newEmailAddress);
+				} catch (IOException emailInput){
+					emailInput.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
+			}
 		}
-		
-		}	
-
+		return newEmailAddress;
 	}
-
-
-
 
 }
 
