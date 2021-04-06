@@ -87,6 +87,8 @@ public class NewBank {
 				case "SHOWMYACCOUNTS" :
 					return showMyAccounts(customer);
 
+				case "HELP" :
+					return "Our customer support is available 24/7 at 0800-04243-241";
 				case "YES" :
 					return "What do you want to do?";
 

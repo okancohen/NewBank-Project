@@ -32,7 +32,8 @@ public class NewBankClientHandler extends Thread{
 			out.println("1. Login to your account       \n");
 			out.println("2. Create a new account        \n");
 			//FR12 'More Info' for potential clients
-			out.println("3. Learn more about NewBank servvices        \n");
+			out.println("3. Learn more about NewBank services        \n");
+			out.println("4. Contact a NewBank employee        \n");
 			out.println(" ----------------------------- \n");
 			out.println("Please enter your selection:   \n");
 
@@ -118,6 +119,12 @@ public class NewBankClientHandler extends Thread{
 					out.println("You can now complete a range of online services from account creation to transfers and more! We look forward to having you as a client. For more information you can call us directly at 800-xxx-xxxx");
 
 					break;
+				// ------------- OPTION 4 - Contact a NewBank employee -------------------
+				case 4:
+					// Get a new account name
+					out.println("Our customer support is available 24/7 at 0800-04243-241");
+
+					break;
 
 				default:
 					break;
@@ -151,7 +158,7 @@ public class NewBankClientHandler extends Thread{
 
 	private Integer getSelection(String selection){
 
-			if(selection.equals("1") || selection.equals("2")) {
+			if(selection.equals("1") || selection.equals("2") || selection.equals("3") || selection.equals("4")) {
 				Integer option = Integer.parseInt(selection);
 				return option;
 			}else {
