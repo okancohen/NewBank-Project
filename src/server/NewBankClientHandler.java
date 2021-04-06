@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NewBankClientHandler extends Thread{
 	
@@ -25,10 +27,12 @@ public class NewBankClientHandler extends Thread{
 		try {
 			// ask for user name
 
-			out.println(" ---- Wellcome to NewBank ---- \n");
+			out.println(" ---- Welcome to NewBank ---- \n");
 			out.println("Do you want to:                \n");
 			out.println("1. Login to your account       \n");
 			out.println("2. Create a new account        \n");
+			//FR12 'More Info' for potential clients
+			out.println("3. Learn more about NewBank servvices        \n");
 			out.println(" ----------------------------- \n");
 			out.println("Please enter your selection:   \n");
 
@@ -72,20 +76,46 @@ public class NewBankClientHandler extends Thread{
 					String newUserName = in.readLine();
 
 					String newCustomer = checkNewUserName(newUserName);
+					
+					//Grab user contact information (start with email address for now - FR9)
+					
+					out.println("Please enter your email address");
+					String newEmailAddress = in.readLine();
+					
+					//check if email address valid - i.e not used before - unfinished: complete this method below and re-comment this
+					
+					String newCustomerEmail = checkNewEmail(newEmailAddress);
+					
+					//Add more contact information as needed - email satisfactory for now
 
 					out.println("Please enter the type of account you want ");
 					String accountName = in.readLine();
 
-					out.println("Please enter the initial amount you with to deposit");
+					out.println("Please enter the initial amount you wish to deposit");
 					String openingBalance = in.readLine();
 					double balance = Double.parseDouble(openingBalance);
 
 					out.println("Please add a password to your account");
 					String pw = in.readLine();
 
+					out.println("Please add your home address to your account");
+					String address = in.readLine();
 
-					Account newAccount = new Account(accountName,balance);
+					out.println("Please add your phone number to your account");
+					String phoneNumber = in.readLine();
 
+					//Account newAccount = new Account(accountName, balance, 0, address, phoneNumber);
+					Customer joiningCustomer = new Customer();
+					joiningCustomer.addAccount(new Account(accountName, balance, 0, address, phoneNumber, newCustomerEmail));
+					bank.addCustomerToBank(accountName, joiningCustomer);
+
+					break;
+					
+				// ------------- OPTION 3 - Learn more about NewBank Services -------------------
+				case 3:
+					// Get a new account name
+					out.println("Welcome to NewBank! NewBank is one of the country's largest banks and we are now proud to start offering our services online.");
+					out.println("You can now complete a range of online services from account creation to transfers and more! We look forward to having you as a client. For more information you can call us directly at 800-xxx-xxxx");
 
 					break;
 
@@ -140,13 +170,13 @@ public class NewBankClientHandler extends Thread{
 		return null;
 	}
 
-	/** Takes checks if the client already has an ccount, or the username is already being used.
+	/** Takes checks if the client already has an account, or the username is already being used.
 	 * @param newUserName
 	 * @return newUserName
 	 */
-	private String checkNewUserName(String newUserName){
+	private String checkNewUserName(String newUserName) {
 
-		if(bank.checkIfAccount(newUserName)) {
+		if (bank.checkIfAccount(newUserName)) {
 			out.println("This username already exists");
 			out.println("Please try provide a different username");
 			try {
@@ -159,11 +189,44 @@ public class NewBankClientHandler extends Thread{
 		}
 
 		return newUserName;
-
 	}
+		
+	//Checks if email address is valid (was not previously used for regsitration - ie does not exist in database)
+		
+	private String checkNewEmail(String newEmailAddress){
+		
+		//go back to class and add the respective method
+		
+		if(bank.checkIfEmail(newEmailAddress)) {
+			out.println("This email address is already used to create a NewBank Account");
+			out.println("Please provide a different email address or log in using your username and password");
+			try {
+				newEmailAddress = in.readLine();
+				return checkNewEmail(newEmailAddress);
+			} catch (IOException em) {
+				em.printStackTrace();
+				Thread.currentThread().interrupt();
+			
+			} 
+		} else {
 
+			String REGEX = "^(.+)@(.+)$";
+			Pattern emailPattern = Pattern.compile(REGEX);
+			Matcher validEmail = emailPattern.matcher(newEmailAddress);
 
-
+			while(!validEmail.matches()){
+				try{
+					out.println("The inserted email is not valid, please enter a new one");
+					newEmailAddress = in.readLine();
+					validEmail = emailPattern.matcher(newEmailAddress);
+				} catch (IOException emailInput){
+					emailInput.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
+			}
+		}
+		return newEmailAddress;
+	}
 
 }
 
