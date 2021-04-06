@@ -76,10 +76,26 @@ public class Account {
 
 
 	public double getBalance(){ return this.openingBalance;}
-
+	
+	//show current savings goal
+	
+	public double getSavingsGoal(){ return this.mySavingsGoal;}
+	
+	//change or update mySavingsGoal
+	
+	public void updateMySavingsGoal(double newGoal){
+		this.mySavingsGoal == newGoal;
+	}
+	
+	//Find remaining amount to deposit before savingsGoal is reached
+	
+	public double remainderToSavingsGoal(){
+		return this.mySavingsGoal - openingBalance;
+	}
 
 	public String getEmailAddress() {
 		return emailAddress;
 	}
+
 
 }
