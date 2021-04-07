@@ -1,8 +1,10 @@
 package server;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class NewBank {
 	
@@ -24,7 +26,7 @@ public class NewBank {
 		Customer bhagy = new Customer();
 		bhagy.addAccount(new Account("Current", 1000.0, 0, 300));
 		bhagy.addAccount(new Account("Savings", 800,5000, "bhagy@gmail.com"));
-		bhagy.setPassword("password");
+		bhagy.setPassword("Password");
 		customers.put("Bhagy", bhagy);
 		
 		Customer christina = new Customer();
@@ -87,11 +89,13 @@ public class NewBank {
 				case "SHOWMYACCOUNTS" :
 					return showMyAccounts(customer);
 
-				case "YES" :
-					return "What do you want to do?";
+				case "EXIT":
 
 				case "NO" :
 					return "EXIT";
+
+				case "YES" :
+					return "What do you want to do?";
 
 				case "DEPOSIT":
 					action.add("deposit");

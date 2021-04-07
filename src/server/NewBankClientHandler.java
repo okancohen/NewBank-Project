@@ -51,7 +51,7 @@ public class NewBankClientHandler extends Thread{
 						// if the user is authenticated then get requests from the user and process themm
 						if (customer != null) {
 							out.println("Log In Successful. What do you want to do?");
-							while (true) {
+							customerLoop: while (true) {
 								String request = in.readLine();
 								System.out.println("Request from " + customer.getKey());
 								String response = bank.processRequest(customer, request);
@@ -60,9 +60,19 @@ public class NewBankClientHandler extends Thread{
 									out.println("Sorry - your request was not recognised");
 									out.println("Please try again");
 								}
+								else if (response.equals("EXIT")){
+									out.println("Returning to main menu \n" +
+											" ----------------------------- \n" +
+											"Please select another option from the menu: \n");
+									printMenu();
+									break customerLoop;
+								}
 							}
 						} else {
 							out.println("Log In Failed");
+							out.println(" ----------------------------- \n" +
+									 "Please select another option from the menu: \n");
+							printMenu();
 						}
 
 						break;
