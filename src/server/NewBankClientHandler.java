@@ -174,6 +174,7 @@ public class NewBankClientHandler extends Thread{
 			}else {
 				out.println("Sorry - your selection was not recognised\n");
 				out.println("Please try again");
+				printMenu();
 					try {
 						selection = in.readLine();
 						return getSelection(selection);
