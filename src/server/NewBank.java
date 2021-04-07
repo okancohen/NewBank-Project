@@ -86,8 +86,15 @@ public class NewBank {
 
 
 			switch(request) {
+
+				case "?":
+					return menuOptions() + "\n What do you want to do?\n";
+
+
+
 				case "SHOWMYACCOUNTS" :
-					return showMyAccounts(customer);
+					return showMyAccounts(customer) + "\n Do you want to use another service? \n (press `?` for menu options)\n" ;
+
 
 				case "EXIT":
 
@@ -144,7 +151,7 @@ public class NewBank {
 								break;
 							}
 						}
-						return s  + "\n Do you want to use another service? " ;
+						return s  + "\n Do you want to use another service? \n (press `?` for menu options)\n" ;
 
 
 
@@ -195,7 +202,7 @@ public class NewBank {
 
 		return "You have " + action +  " " + amount + " your " + acc + " account\n " +
 				"Your balance is now " + account.getBalance() + "\n\n" +
-				"Do you want to use another service?";
+				"Do you want to use another service? \n (press `?` for menu options)\n";
 	}
 
 
@@ -220,7 +227,7 @@ public class NewBank {
 		return Amount + " transferred from your " + AccountFrom + " to your " + AccountTo + " account.\n" +
 				"Your balance in your " + AccountFrom + " account is now " + accountFrom.getBalance() + "\n" +
 				"and your balance in your" + AccountTo + " account is " + accountTo.getBalance() + "\n\n" +
-				"Do you want to use another service?";
+				"Do you want to use another service? \n (press `?` for menu options)\n";
 
 	}
 
@@ -239,6 +246,29 @@ public class NewBank {
 			}
 		}
 		return false;
+	}
+
+
+	private String menuOptions(){
+		return (" ----------------------------- \n" +
+				"OPTIONS:                       \n" +
+		        "\t (A.) To see accounts: \033[0;1m SHOWMYACCOUNTS \033[0;0m\n" +
+				"\t (B.) To deposit money: \033[0;1m DEPOSIT \033[0;0m\n" +
+				"\t\t\t You will then be prompted for the following:\n" +
+				"\t\t\t\t i.) the account to which you wish to deposit, eg. CURRENT or SAVINGS\n" +
+				"\t\t\t\t ii.) the amount you wish to deposit.\n" +
+				"\t (C.) To withdraw money: \033[0;1m WITHDRAW \033[0;0m\n" +
+				"\t\t\t You will then be prompted for the following:\n" +
+				"\t\t\t\t i.) the account from which you wish to withdraw, eg. CURRENT or SAVINGS\n" +
+				"\t\t\t\t ii.) the amount you wish to withdraw.\n" +
+				"\t (D.) To transfer money: \033[0;1m TRANSFER \033[0;0m\n" +
+				"\t\t\t You will then be prompted for the following:\n" +
+				"\t\t\t\t i.) the account from which to transfer\n" +
+				"\t\t\t\t ii.) the amount you with to withdraw\n" +
+				"\t\t\t\t iii.) and finally the account you wish to transfer to.\n" +
+				"\t (E.) To view recent transactions: \033[0;1m SHOWMYTRANSACTIONS \033[0;0m\n" +
+				"\t (F.) To exit back to main menu: \033[0;1m EXIT \033[0;0m\n" +
+				" ----------------------------- \n");
 	}
 
 
