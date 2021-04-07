@@ -5,8 +5,10 @@
 
 package server;
 
-public class InvestingAccount {
 
+public class InvestingAccount extends Account{
+
+	private String accountName;
 	private final String investmentType;
   //initial options: Guaranteed Savings Account Returns, Low-risk investment portfolio, Medium-risk investment portfolio
 	
@@ -22,6 +24,7 @@ public class InvestingAccount {
   //Medium-risk investment portfolio: %2.75
 
 	public InvestingAccount(String investmentType, double startAmount, double returnRate) {
+		super(null);
 		this.investmentType = investmentType;
 		this.startAmount = startAmount;
 	}
