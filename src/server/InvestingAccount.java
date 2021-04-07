@@ -5,23 +5,23 @@
 
 package server;
 
-public class Investing {
-	
-	private String investmentType;
+public class InvestingAccount {
+
+	private final String investmentType;
   //initial options: Guaranteed Savings Account Returns, Low-risk investment portfolio, Medium-risk investment portfolio
 	
-  private double startAmount;
+   private double startAmount;
   
 	// come back to savings goal to incorporate it later : private double mySavingsGoal;
   
-  private double returnRate;
+   private double returnRate;
   //investment rate of return - assuming it's fixed and guaranteed for now
   //initial options - per year rate of return: 
   //Guaranteed Savings Account Returns = 1%
   //Low-risk investment portfolio: %2
   //Medium-risk investment portfolio: %2.75
 
-	public Account(String investmentType, double startAmount, double returnRate) {
+	public InvestingAccount(String investmentType, double startAmount, double returnRate) {
 		this.investmentType = investmentType;
 		this.startAmount = startAmount;
 	}
@@ -36,15 +36,18 @@ public class Investing {
 		this.startAmount += amount;
 	}
   
-  public String viewInvestmentTypes() {
-    
-    return ("Thanks for choosing to invest and grow your Savings with NewBank. Here are the investment options we currently offer:" + "1. Guaranteed Savings Account Returns = 1% \n"
-  + "2. Low-risk investment portfolio: %2 \n" + "3. Medium-risk investment portfolio: %2.75 \n"
+    public String viewInvestmentTypes() {
+		return ("Thanks for choosing to invest and grow your Savings with NewBank.\n" +
+				"Here are the investment options we currently offer: \n\n" +
+				"1. Guaranteed Savings Account Returns = 1% \n" +
+				"2. Low-risk investment portfolio: %2 \n" +
+				"3. Medium-risk investment portfolio: %2.75 \n");
   }
   
-  //option for client to view potnetial reutrns from an investment choice over a provided a number of years (add investment type as an arugment later - currently this only answers for investment type 1)
-  public void viewPotentialReturns(double years){
-    this.startAmount * ((1+0.01) * years);
+  //option for client to view potential returns from an investment choice over a
+  // provided a number of years (add investment type as an argument later - currently this only answers for investment type 1)
+  public String viewPotentialReturns(double years){
+    	return (""+this.startAmount * ((1+0.01) * years));
   }
 
 
