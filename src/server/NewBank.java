@@ -55,6 +55,7 @@ public class NewBank {
 		customers.put(accountName, customer);
 	}
 
+
 	// commands from the NewBank customer are processed in this method
 	public synchronized String processRequest(CustomerID customer, String request) {
 		if(customers.containsKey(customer.getKey())) {
@@ -249,7 +250,7 @@ public class NewBank {
 	}
 
 
-	private String menuOptions(){
+	public String menuOptions(){
 		return (" ----------------------------- \n" +
 				"OPTIONS:                       \n" +
 		        "\t (A.) To see accounts: \033[0;1m SHOWMYACCOUNTS \033[0;0m\n" +
@@ -270,6 +271,10 @@ public class NewBank {
 				"\t (F.) To exit back to main menu: \033[0;1m EXIT \033[0;0m\n" +
 				" ----------------------------- \n");
 	}
+
+
+
+
 
 
 

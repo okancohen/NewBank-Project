@@ -114,8 +114,46 @@ public class NewBankClientHandler extends Thread{
 
 						//Account newAccount = new Account(accountName, balance, 0, address, phoneNumber);
 						Customer joiningCustomer = new Customer();
+						// set the password for the customer
+						joiningCustomer.setPassword(pw);
 						joiningCustomer.addAccount(new Account(accountName, balance, 0, address, phoneNumber, newCustomerEmail));
-						bank.addCustomerToBank(accountName, joiningCustomer);
+						bank.addCustomerToBank(newCustomer, joiningCustomer);
+
+
+
+						CustomerID joiningCustomerID = bank.checkLogInDetails(newCustomer, pw);
+
+						if (joiningCustomerID!=null) {
+							out.println("You have successfully created an account. \n" +
+									" ----------------------------- \n" +
+									"Please select an option from the menu:");
+
+							out.println(bank.menuOptions());
+
+							joiningCustomerLoop:
+							while (true) {
+								String request = in.readLine();
+								System.out.println("Request from " + joiningCustomerID.getKey());
+								String response = bank.processRequest(joiningCustomerID, request);
+								out.println(response);
+								if (response.equals("FAIL")) {
+									out.println("Sorry - your request was not recognised");
+									out.println("Please try again");
+								} else if (response.equals("EXIT")) {
+									out.println("Returning to main menu \n" +
+											" ----------------------------- \n" +
+											"Please select another option from the menu: \n");
+									printMenu();
+									break joiningCustomerLoop;
+								}
+							}
+						}else {
+							out.println("Log in fail");
+							out.println(" ----------------------------- \n" +
+									"Please select another option from the menu: \n");
+							printMenu();
+						}
+
 
 						break;
 
