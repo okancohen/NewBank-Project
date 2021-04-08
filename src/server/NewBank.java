@@ -31,6 +31,7 @@ public class NewBank {
 		
 		Customer christina = new Customer();
 		christina.addAccount(new Account("Savings", 1500.0, 3000, "christina@gmail.com")); // add savings goal for christina's savings account //
+		christina.setPassword("password");
 		customers.put("Christina", christina);
 		
 		Customer john = new Customer();
@@ -88,7 +89,8 @@ public class NewBank {
 			switch(request) {
 				case "SHOWMYACCOUNTS" :
 					return showMyAccounts(customer);
-
+				case "HELP" :
+					return "Reach out to an employee at 800-123-4567";
 				case "EXIT":
 
 				case "NO" :

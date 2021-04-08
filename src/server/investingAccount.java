@@ -5,7 +5,7 @@
 
 package server;
 
-public class Investing {
+public class investingAccount {
 	
 	private String investmentType;
   //initial options: Guaranteed Savings Account Returns, Low-risk investment portfolio, Medium-risk investment portfolio
@@ -21,7 +21,7 @@ public class Investing {
   //Low-risk investment portfolio: %2
   //Medium-risk investment portfolio: %2.75
 
-	public Account(String investmentType, double startAmount, double returnRate) {
+	public void Account(String investmentType, double startAmount, double returnRate) {
 		this.investmentType = investmentType;
 		this.startAmount = startAmount;
 	}
@@ -39,12 +39,12 @@ public class Investing {
   public String viewInvestmentTypes() {
     
     return ("Thanks for choosing to invest and grow your Savings with NewBank. Here are the investment options we currently offer:" + "1. Guaranteed Savings Account Returns = 1% \n"
-  + "2. Low-risk investment portfolio: %2 \n" + "3. Medium-risk investment portfolio: %2.75 \n"
+  + "2. Low-risk investment portfolio: %2 \n" + "3. Medium-risk investment portfolio: %2.75 \n");
   }
   
-  //option for client to view potnetial reutrns from an investment choice over a provided a number of years (add investment type as an arugment later - currently this only answers for investment type 1)
+  //option for client to view potential returns from an investment choice over a provided a number of years (add investment type as an argument later - currently this only answers for investment type 1)
   public void viewPotentialReturns(double years){
-    this.startAmount * ((1+0.01) * years);
+    this.startAmount = this.startAmount * ((1+0.01) * years);
   }
 
 
