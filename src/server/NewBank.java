@@ -88,7 +88,8 @@ public class NewBank {
 			switch(request) {
 				case "SHOWMYACCOUNTS" :
 					return showMyAccounts(customer);
-
+				case "HELP":
+						return "An employee is ready to assist you at 0800-123-4567";
 				case "EXIT":
 
 				case "NO" :

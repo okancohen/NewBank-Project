@@ -125,7 +125,7 @@ public class NewBankClientHandler extends Thread{
 						out.println("Welcome to NewBank! NewBank is one of the country's largest banks and we are now proud to start offering our services online.");
 						out.println("You can now complete a range of online services from account creation to transfers and more! \n " +
 								"We look forward to having you as a client.  \n" +
-								"For more information you can call us directly at 800-xxx-xxxx \n " +
+								"For more information you can call us directly at 0800-123-4567\n " +
 								" ----------------------------- \n" +
 								"Please select another option from the menu: \n");
 						// restart the welcome statement
