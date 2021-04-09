@@ -11,6 +11,10 @@ public class Account {
 	private String emailAddress;
 
 
+	public Account(String accountName){
+		this.accountName = accountName;
+	}
+
 	public Account(String accountName, double openingBalance) {
 		this.accountName = accountName;
 		this.openingBalance = openingBalance;
