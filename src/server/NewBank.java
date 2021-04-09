@@ -1,5 +1,10 @@
 package server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +26,7 @@ public class NewBank {
 		customers = new HashMap<>();
 		addTestData();
 	}
+
 	
 	private void addTestData() {
 		Customer bhagy = new Customer();
@@ -58,18 +64,21 @@ public class NewBank {
 	// commands from the NewBank customer are processed in this method
 	public synchronized String processRequest(CustomerID customer, String request) {
 		if(customers.containsKey(customer.getKey())) {
-
+		//FIXME
 
 			/* Check if needs to convert to a numeric amount */
 			if((action.size() == acc.size()) && isNumeric(request)) {
 				amount.add(Double.parseDouble(request));
+				//FIXME When an action is set and any numeric value is re-entered without choosing a new action the
+				// programm automatically performs the action of the last state with the new numeric value.
+				// Test Case 1: Go through LOGIN process. Then Input WITHDRAW; 300; 1
+				// Test Case 2: Go through LOGIN process. Then Input DEPOSIT; 200; 5
 				request ="AMOUNT";
 			}
 
 			if((action.size() != acc.size()) && isNumeric(request)){
 				return "FAIL";
 			}
-
 
 			if(transfer_sequence.equals(1)){
 				acc.add(request.toLowerCase());

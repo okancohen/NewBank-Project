@@ -64,6 +64,7 @@ public class Account {
 	public void withdrawMoney(double amount){
 		if (this.openingBalance + this.overdraft <= amount) {
 			//TODO add text output when not possible to withdraw
+			//{System.out.println("TEST STRING");}
 			//Print statement doesn't work as it is returning to New Bank (check this out. its lovely.)
 		} else {
 				this.openingBalance -= amount;
