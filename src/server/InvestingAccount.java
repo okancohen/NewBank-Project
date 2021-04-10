@@ -22,21 +22,24 @@ public class InvestingAccount extends Account{
 	//Low-risk investment portfolio: %2
 	//Medium-risk investment portfolio: %2.75
 
-	public InvestingAccount(String investmentType, double startAmount, double returnRate) {
-		super(null);
+	public InvestingAccount(String investmentType, double startAmount) {
+		super("INVESTMENT", startAmount);
 		this.investmentType = investmentType;
-		this.startAmount = startAmount;
+		this.startAmount =startAmount; // keep for future projections
+	}
+
+	public InvestingAccount(String investmentType, double startAmount, double returnRate) {
+		super("INVESTMENT", startAmount);
+		this.investmentType = investmentType;
+		this.returnRate = returnRate;
+		this.startAmount =startAmount; // keep for future projections
 	}
 
 
-	public String toString() {
-		return (investmentType + ": " + startAmount);
+	public String printString() {
+		return (investmentType + ": " + getBalance());
 	}
 
-
-	public void investMoney(double amount ){
-		this.startAmount += amount;
-	}
 
 	public String viewInvestmentTypes() {
 		return ("Thanks for choosing to invest and grow your Savings with NewBank.\n" +
@@ -56,7 +59,5 @@ public class InvestingAccount extends Account{
 		return this.investmentType;
 	}
 
-
-	public double getBalance(){ return this.startAmount;}
 
 }

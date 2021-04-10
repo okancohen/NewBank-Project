@@ -1,10 +1,5 @@
 package server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,10 +32,12 @@ public class NewBank {
 		
 		Customer christina = new Customer();
 		christina.addAccount(new Account("Savings", 1500.0, 3000, "christina@gmail.com")); // add savings goal for christina's savings account //
+		christina.setPassword("Password");
 		customers.put("Christina", christina);
 		
 		Customer john = new Customer();
 		john.addAccount(new Account("Current", 250,0, "john@gmail.com"));
+		john.setPassword("Password");
 		customers.put("John", john);
 
 	}
@@ -97,7 +94,7 @@ public class NewBank {
 			switch(request) {
 
 				case "?":
-					return menuOptions() + "\n What do you want to do?\n";
+					return menuOptions() + "\n What do you want to do? \n (press `?` for menu options)\n";
 
 				case "SHOWMYACCOUNTS" :
 					return showMyAccounts(customer) +
@@ -110,7 +107,7 @@ public class NewBank {
 					return "EXIT";
 
 				case "YES" :
-					return "What do you want to do?";
+					return "What do you want to do? \n (press `?` for menu options)\n";
 
 				case "DEPOSIT":
 					action.add("deposit");
@@ -159,11 +156,10 @@ public class NewBank {
 								break;
 							}
 						}
-						return s  + "\n Do you want to use another service? " ;
+						return s  + "\n Do you want to use another service? \n (press `?` for menu options)\n";
 
-
-
-
+				case "ADDACCOUNT":
+					return "ADDACCOUNT";
 
 			default : return "FAIL";
 			}
@@ -188,6 +184,8 @@ public class NewBank {
 		}
 		return pattern.matcher(strNum).matches();
 	}
+
+
 
 
 
@@ -257,6 +255,14 @@ public class NewBank {
 	}
 
 
+	public void addNewAccount(CustomerID customer, Account newAccount) throws Exception {
+		customers.get(customer.getKey()).addAccount(newAccount);
+	}
+
+
+
+
+
 	public String menuOptions(){
 		return (" ----------------------------- \n" +
 				"OPTIONS:                       \n" +
@@ -275,7 +281,8 @@ public class NewBank {
 				"\t\t\t\t ii.) the amount you with to withdraw\n" +
 				"\t\t\t\t iii.) and finally the account you wish to transfer to.\n" +
 				"\t (E.) To view recent transactions: \033[0;1m SHOWMYTRANSACTIONS \033[0;0m\n" +
-				"\t (F.) To exit back to main menu: \033[0;1m EXIT \033[0;0m\n" +
+				"\t (F.) To add a new account: \033[0;1m ADDACCOUNT \033[0;0m\n" +
+				"\t (H.) To exit back to main menu: \033[0;1m EXIT \033[0;0m\n" +
 				" ----------------------------- \n");
 	}
 

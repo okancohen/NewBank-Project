@@ -60,6 +60,41 @@ public class NewBankClientHandler extends Thread{
 									out.println("Sorry - your request was not recognised");
 									out.println("Please try again");
 								}
+								// TO TRY AND ADD AN ACCOUNT
+								else if (response.equals("ADDACCOUNT")){
+									out.println("What type of account do you want to add? \n Options include: SAVINGS, CURRENT or INVESTMENT");
+									String newAccount = in.readLine();
+									String validAccount = checkAccountType(newAccount);
+
+										try{
+												if(validAccount.equals("INVESTMENT")){ // FOR INVESTMENT ACCOUNTS
+													out.println("Please enter the type of investment account you want? \n options: `low`, `medium` `guarrenteed`");
+
+													String investmentType = in.readLine();
+
+													out.println("Please enter the amount you would like to invest");
+													String openingBalance = in.readLine();
+													double balance = Double.parseDouble(openingBalance);
+													bank.addNewAccount(customer, new InvestingAccount(investmentType, balance));
+
+												}else { // otherwise if SAVINGS or CURRENT
+													out.println("Please enter the initial amount you wish to deposit");
+													String openingBalance = in.readLine();
+													double balance = Double.parseDouble(openingBalance);
+													bank.addNewAccount(customer, new Account(validAccount, balance));
+												}
+
+										// AFTER CREATING ACCOUNT - go back to standard menu
+										out.println("Thank you for creating a new " + validAccount + " account with newbank\n" +
+														" ----------------------------- \n" +
+														"Do you want to use another service? \n");
+
+										}catch (Exception e){
+											out.println("Sorry - your request was not recognised");
+											out.println("Please try again");
+										}
+
+								}
 								else if (response.equals("EXIT")){
 									out.println("Returning to main menu \n" +
 											" ----------------------------- \n" +
@@ -245,6 +280,24 @@ public class NewBankClientHandler extends Thread{
 
 		return newUserName;
 	}
+
+
+	private String checkAccountType(String newAccount){
+		if (newAccount.equals("SAVINGS") || newAccount.equals("CURRENT") || newAccount.equals("INVESTMENT")) {
+			return newAccount;
+		}else{
+			try {
+				newAccount = in.readLine();
+			} catch (IOException em) {
+				em.printStackTrace();
+				Thread.currentThread().interrupt();
+			}
+		}
+		return checkAccountType(newAccount);
+	}
+
+
+
 		
 	//Checks if email address is valid (was not previously used for regsitration - ie does not exist in database)
 		
