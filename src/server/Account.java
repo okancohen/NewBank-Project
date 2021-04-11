@@ -33,7 +33,8 @@ public class Account {
 		this.openingBalance = openingBalance;
 		this.mySavingsGoal = mySavingsGoal;
 		this.overdraft = overdraft;
-	}
+	} //TODO I am considering how to change this to give the bank more power in the overdraft setting.
+
 	//Overloaded constructor just for the email addition to existing accounts in db
 	public Account(String accountName, double openingBalance, double mySavingsGoal, String emailAddress) {
 		this.accountName = accountName;
@@ -60,10 +61,6 @@ public class Account {
 	public void depositMoney(double amount ){
 		this.openingBalance += amount;
 	}
-
-	public void changeOverdraft(double amount ){
-		this.overdraft = amount;
-	} //TODO make this use-able
 
 	public void withdrawMoney(double amount){
 		if (this.openingBalance + this.overdraft <= amount) {
