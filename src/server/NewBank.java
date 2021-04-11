@@ -1,10 +1,5 @@
 package server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +7,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class NewBank {
-	
+
 	private static final NewBank bank = new NewBank();
 	private HashMap<String,Customer> customers;
 	private ArrayList<String> action = new ArrayList<String>();
@@ -27,28 +22,28 @@ public class NewBank {
 		addTestData();
 	}
 
-	
+
 	private void addTestData() {
 		Customer bhagy = new Customer();
 		bhagy.addAccount(new Account("Current", 1000.0, 0, 300));
 		bhagy.addAccount(new Account("Savings", 800,5000, "bhagy@gmail.com"));
 		bhagy.setPassword("Password");
 		customers.put("Bhagy", bhagy);
-		
+
 		Customer christina = new Customer();
 		christina.addAccount(new Account("Savings", 1500.0, 3000, "christina@gmail.com")); // add savings goal for christina's savings account //
 		customers.put("Christina", christina);
-		
+
 		Customer john = new Customer();
 		john.addAccount(new Account("Current", 250,0, "john@gmail.com"));
 		customers.put("John", john);
 
 	}
-	
+
 	public static NewBank getBank() {
 		return bank;
 	}
-	
+
 	public synchronized CustomerID checkLogInDetails(String userName, String password) {
 		if(customers.containsKey(userName) && customers.get(userName).correctPassword(password)){
 			return new CustomerID(userName);
@@ -64,10 +59,9 @@ public class NewBank {
 	// commands from the NewBank customer are processed in this method
 	public synchronized String processRequest(CustomerID customer, String request) {
 		if(customers.containsKey(customer.getKey())) {
-		//FIXME
 
-			/* Check if needs to convert to a numeric amount */
-			if((action.size() == acc.size()) && isNumeric(request)) {
+			/* Check if needs to convert to a numeric amount & if input number is positive */
+			if((action.size() == acc.size()) && isNumeric(request) && isPositive(request) ) {
 				amount.add(Double.parseDouble(request));
 				//FIXME When an action is set and any numeric value is re-entered without choosing a new action the
 				// programm automatically performs the action of the last state with the new numeric value.
@@ -76,7 +70,7 @@ public class NewBank {
 				request ="AMOUNT";
 			}
 
-			if((action.size() != acc.size()) && isNumeric(request)){
+			if((action.size() != acc.size()) && isNumeric(request) && isPositive(request)){
 				return "FAIL";
 			}
 
@@ -103,7 +97,7 @@ public class NewBank {
 					return showMyAccounts(customer) +
 							"\n Do you want to use another service? \n (press `?` for menu options)\n" ;
 				case "HELP":
-						return "An employee is ready to assist you at 0800-123-4567";
+					return "An employee is ready to assist you at 0800-123-4567";
 				case "EXIT":
 
 				case "NO" :
@@ -151,26 +145,26 @@ public class NewBank {
 					}
 
 				case "SHOWMYTRANSACTIONS":
-						String s= "\n";
-						for (int row =0; row < action.size(); row++) {
-							try {
-								s += (String.format("%20s %20s %20s", acc.get(row), action.get(row), amount.get(row)) + "\n");
-							} catch (Exception e){
-								break;
-							}
+					String s= "\n";
+					for (int row =0; row < action.size(); row++) {
+						try {
+							s += (String.format("%20s %20s %20s", acc.get(row), action.get(row), amount.get(row)) + "\n");
+						} catch (Exception e){
+							break;
 						}
-						return s  + "\n Do you want to use another service? " ;
+					}
+					return s  + "\n Do you want to use another service? " ;
 
 
 
 
 
-			default : return "FAIL";
+				default : return "FAIL";
 			}
 		}
 		return "FAIL";
 	}
-	
+
 	private String showMyAccounts(CustomerID customer) {
 		return (customers.get(customer.getKey())).accountsToString();
 	}
@@ -181,7 +175,7 @@ public class NewBank {
 		return customers.containsKey(customer);
 	}
 
-	// check if the request is in a numeric form.
+	// check if the request is in a positive numeric form.
 	private boolean isNumeric(String strNum) {
 		if (strNum == null) {
 			return false;
@@ -189,6 +183,13 @@ public class NewBank {
 		return pattern.matcher(strNum).matches();
 	}
 
+	// check if the request is a positive number.
+	private boolean isPositive(String strPos) {
+		if (Double.parseDouble(strPos)<0) {
+			return false;
+		}
+		return pattern.matcher(strPos).matches();
+	}
 
 
 
