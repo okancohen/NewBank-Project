@@ -51,11 +51,7 @@ public class Customer {
 		return this.password.equals(password);
 	}
 
-	public ArrayList<Account> getAccounts(){
-		return accounts;
-	}
-
-
+	public ArrayList<Account> getAccounts(){return accounts;}
 
 
 
