@@ -63,9 +63,21 @@ public class NewBankClientHandler extends Thread{
 								// TO TRY AND ADD AN ACCOUNT
 								else if (response.equals("ADDACCOUNT")){
 									out.println("What type of account do you want to add? \n Options include: SAVINGS, CURRENT or INVESTMENT");
-									String newAccount = in.readLine();
-									String validAccount = checkAccountType(newAccount);
+										//while statement for input
+									String newAccount = "";
+									boolean inputValidation = false;
+									while(!inputValidation){
+										String newAccountTemp = in.readLine();
+										if(newAccountTemp.compareToIgnoreCase("savings") == 0 || newAccountTemp.compareToIgnoreCase("investment") == 0 || newAccountTemp.compareToIgnoreCase("Current") == 0){
+											inputValidation = true;
+											newAccount = newAccountTemp.toUpperCase();
 
+										} else {
+											out.println("Input not recognised. Please choose either: SAVINGS, CURRENT or INVESTMENT (this is not case-sensitive)");
+										}
+									}
+
+									String validAccount = checkAccountType(newAccount);
 										try{
 												if(validAccount.equals("INVESTMENT")){ // FOR INVESTMENT ACCOUNTS
 													out.println("Please enter the type of investment account you want? \n options: `low`, `medium` `guarrenteed`");
