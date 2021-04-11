@@ -164,7 +164,9 @@ public class NewBankClientHandler extends Thread{
 								"We look forward to having you as a client.  \n" +
 								"For more information you can call us directly at 0800-123-4567\n " +
 								" ----------------------------- \n" +
-								"Please select another option from the menu: \n");
+								"press any key to continue");
+						in.read();
+						out.println("Please select another option from the menu: \n");
 						// restart the welcome statement
 						printMenu();
 
