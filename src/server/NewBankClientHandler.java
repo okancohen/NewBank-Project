@@ -51,7 +51,8 @@ public class NewBankClientHandler extends Thread{
 						// if the user is authenticated then get requests from the user and process themm
 						if (customer != null) {
 							out.println("Log In Successful. What do you want to do? \n (press `?` for menu options)\n");
-							customerLoop: while (true) {
+							customerLoop:
+							while (true) {
 								String request = in.readLine();
 								System.out.println("Request from " + customer.getKey());
 								String response = bank.processRequest(customer, request);
@@ -61,14 +62,14 @@ public class NewBankClientHandler extends Thread{
 									out.println("Please try again");
 								}
 								// TO TRY AND ADD AN ACCOUNT
-								else if (response.equals("ADDACCOUNT")){
+								else if (response.equals("ADDACCOUNT")) {
 									out.println("What type of account do you want to add? \n Options include: SAVINGS, CURRENT or INVESTMENT");
-										//while statement for input
+									//while statement for input
 									String newAccount = "";
 									boolean inputValidation = false;
-									while(!inputValidation){
+									while (!inputValidation) {
 										String newAccountTemp = in.readLine();
-										if(newAccountTemp.compareToIgnoreCase("savings") == 0 || newAccountTemp.compareToIgnoreCase("investment") == 0 || newAccountTemp.compareToIgnoreCase("Current") == 0){
+										if (newAccountTemp.compareToIgnoreCase("savings") == 0 || newAccountTemp.compareToIgnoreCase("investment") == 0 || newAccountTemp.compareToIgnoreCase("Current") == 0) {
 											inputValidation = true;
 											newAccount = newAccountTemp.toUpperCase();
 
@@ -78,36 +79,35 @@ public class NewBankClientHandler extends Thread{
 									}
 
 									String validAccount = checkAccountType(newAccount);
-										try{
-												if(validAccount.equals("INVESTMENT")){ // FOR INVESTMENT ACCOUNTS
-													out.println("Please enter the type of investment account you want? \n options: `low`, `medium` `guarrenteed`");
+									try {
+										if (validAccount.equals("INVESTMENT")) { // FOR INVESTMENT ACCOUNTS
+											out.println("Please enter the type of investment account you want? \n options: `low`, `medium` `guarrenteed`");
 
-													String investmentType = in.readLine();
+											String investmentType = in.readLine();
 
-													out.println("Please enter the amount you would like to invest");
-													String openingBalance = in.readLine();
-													double balance = Double.parseDouble(openingBalance);
-													bank.addNewAccount(customer, new InvestingAccount(investmentType, balance));
+											out.println("Please enter the amount you would like to invest");
+											String openingBalance = in.readLine();
+											double balance = Double.parseDouble(openingBalance);
+											bank.addNewAccount(customer, new InvestingAccount(investmentType, balance));
 
-												}else { // otherwise if SAVINGS or CURRENT
-													out.println("Please enter the initial amount you wish to deposit");
-													String openingBalance = in.readLine();
-													double balance = Double.parseDouble(openingBalance);
-													bank.addNewAccount(customer, new Account(validAccount, balance));
-												}
+										} else { // otherwise if SAVINGS or CURRENT
+											out.println("Please enter the initial amount you wish to deposit");
+											String openingBalance = in.readLine();
+											double balance = Double.parseDouble(openingBalance);
+											bank.addNewAccount(customer, new Account(validAccount, balance));
+										}
 
 										// AFTER CREATING ACCOUNT - go back to standard menu
 										out.println("Thank you for creating a new " + validAccount + " account with newbank\n" +
-														" ----------------------------- \n" +
-														"Do you want to use another service? \n");
+												" ----------------------------- \n" +
+												"Do you want to use another service? \n");
 
-										}catch (Exception e){
-											out.println("Sorry - your request was not recognised");
-											out.println("Please try again");
-										}
+									} catch (Exception e) {
+										out.println("Sorry - your request was not recognised");
+										out.println("Please try again");
+									}
 
-								}
-								else if (response.equals("EXIT")){
+								} else if (response.equals("EXIT")) {
 									out.println("Returning to main menu \n" +
 											" ----------------------------- \n" +
 											"Please select another option from the menu: \n");
@@ -118,7 +118,7 @@ public class NewBankClientHandler extends Thread{
 						} else {
 							out.println("Log In Failed");
 							out.println(" ----------------------------- \n" +
-									 "Please select another option from the menu: \n");
+									"Please select another option from the menu: \n");
 							printMenu();
 						}
 
@@ -141,7 +141,7 @@ public class NewBankClientHandler extends Thread{
 
 						String newCustomerEmail = checkNewEmail(newEmailAddress);
 
-						//Add more contact information as needed - email satisfactory for now
+						//Add more contact information as  needed - email satisfactory for now
 
 						out.println("Please enter the type of account you want ");
 						String accountName = in.readLine();
@@ -158,6 +158,17 @@ public class NewBankClientHandler extends Thread{
 
 						out.println("Please add your phone number to your account");
 						String phoneNumber = in.readLine();
+						boolean phoneNumberVer = true;
+						String REGEX = "^\\d{10}$";
+						Pattern phonePattern = Pattern.compile(REGEX);
+						Matcher phoneMatcher = phonePattern.matcher(phoneNumber);
+						while (!phoneMatcher.matches()) {
+
+							out.println("The inserted phone number is not valid, please enter a new one");
+							phoneNumber = in.readLine();
+							phoneMatcher = phonePattern.matcher(phoneNumber);
+						}
+
 
 						//Account newAccount = new Account(accountName, balance, 0, address, phoneNumber);
 						Customer joiningCustomer = new Customer();
