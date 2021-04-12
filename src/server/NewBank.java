@@ -96,6 +96,9 @@ public class NewBank {
 				case "?":
 					return menuOptions() + "\n What do you want to do? \n (press `?` for menu options)\n";
 
+				case "ADDACCOUNT":
+					return "ADDACCOUNT";
+
 				case "SHOWMYACCOUNTS" :
 					return showMyAccounts(customer) +
 							"\n Do you want to use another service? \n (press `?` for menu options)\n" ;
@@ -157,9 +160,6 @@ public class NewBank {
 							}
 						}
 						return s  + "\n Do you want to use another service? \n (press `?` for menu options)\n";
-
-				case "ADDACCOUNT":
-					return "ADDACCOUNT";
 
 			default : return "FAIL";
 			}
