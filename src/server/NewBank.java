@@ -25,13 +25,13 @@ public class NewBank {
 	
 	private void addTestData() {
 		Customer bhagy = new Customer();
-		bhagy.addAccount(new Account("Current", 1000.0, 0, 300));
+		bhagy.addAccount(new Account("Current", 1000.0, 0, 600));
 		bhagy.addAccount(new Account("Savings", 800,5000, "bhagy@gmail.com"));
 		bhagy.setPassword("Password");
 		customers.put("Bhagy", bhagy);
 		
 		Customer christina = new Customer();
-		christina.addAccount(new Account("Savings", 1500.0, 3000, "christina@gmail.com")); // add savings goal for christina's savings account //
+		christina.addAccount(new Account("Savings", 1500.0, 3000, 600)); // add savings goal for christina's savings account //
 		christina.setPassword("Password");
 		customers.put("Christina", christina);
 		

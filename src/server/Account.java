@@ -1,7 +1,13 @@
 package server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 public class Account {
-	
+
 	private String accountName;
 	private double openingBalance;
 	private double mySavingsGoal;
@@ -32,7 +38,11 @@ public class Account {
 		this.accountName = accountName;
 		this.openingBalance = openingBalance;
 		this.mySavingsGoal = mySavingsGoal;
-		this.overdraft = overdraft;
+		if (overdraft <= 500) {
+		this.overdraft = overdraft; }
+		else if (overdraft > 500) {
+			this.overdraft = 500;
+		}
 	}
 	//Overloaded constructor just for the email addition to existing accounts in db
 	public Account(String accountName, double openingBalance, double mySavingsGoal, String emailAddress) {
@@ -66,7 +76,8 @@ public class Account {
 	} //TODO make this use-able
 
 	public void withdrawMoney(double amount){
-		if (this.openingBalance + this.overdraft <= amount) {
+		if (this.openingBalance + this.overdraft < amount) {
+			System.console().writer().println("TEST");
 			//TODO add text output when not possible to withdraw
 			//{System.out.println("TEST STRING");}
 			//Print statement doesn't work as it is returning to New Bank (check this out. its lovely.)
