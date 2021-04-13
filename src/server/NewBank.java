@@ -154,14 +154,16 @@ public class NewBank {
 					for (int row =0; row < action.size(); row++) {
 						try {
 							s += (String.format("%20s %20s %20s", acc.get(row), action.get(row), amount.get(row)) + "\n");
-						} catch (Exception e){
+						} catch (Exception e) {
 							break;
 						}
 
-						return s  + "\n Do you want to use another service? \n (press `?` for menu options)\n";
+						return s + "\n Do you want to use another service? \n (press `?` for menu options)\n";
+					}
 
+				default:
+					return "FAIL";
 
-				default : return "FAIL";
 			}
 		}
 		return "FAIL";
