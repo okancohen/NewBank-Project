@@ -56,8 +56,10 @@ public class InvestingAccount extends Account{
 		
 		if (rate == lowRisk) {
    			 this.returnRate == 0.01;
-		} else if (rate == ) {
-   			 
+		} else if (rate == mediumrisk) {
+   			 this.returnRate == 0.025;
+		} else if (rate == guaranteed) {
+			this.returnRate == 0.0275;
 		}
 
 	
