@@ -54,11 +54,11 @@ public class InvestingAccount extends Account{
 		//add if-statement or case/s to incorporate the three potential cases around here
 
 		
-		if (rate == lowRisk) {
+		if (rate == guaranteed) {
    			 this.returnRate == 0.01;
-		} else if (rate == mediumrisk) {
+		} else if (rate == lowrisk) {
    			 this.returnRate == 0.025;
-		} else if (rate == guaranteed) {
+		} else if (rate == mediumRisk) {
 			this.returnRate == 0.0275;
 		}
 
