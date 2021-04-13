@@ -85,7 +85,7 @@ public class Account {
 	//the following can replace changeOverdraft and take overdraftLimit as an argument
 	
 	//public void changeOverdraft(double overdraftLimit){
-		//this.ovrdraft == overdraftLimit;
+		//this.overdraft == overdraftLimit;
 	//}
 	
 	public void withdrawMoney(double amount){
