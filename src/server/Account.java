@@ -12,6 +12,7 @@ public class Account {
 	private double openingBalance;
 	private double mySavingsGoal;
 	private double overdraft;
+	private double overdraftLimit;
 	private String address;
 	private String phoneNumber;
 	private String emailAddress;
@@ -71,10 +72,22 @@ public class Account {
 		this.openingBalance += amount;
 	}
 
+	public void findOverdraftLimit(double amount){
+		this.overdraftLimit == (this.openingBalance * 1.2);
+	
+	}
+	//add method to let customer know their overdraft potential 
+	
 	public void changeOverdraft(double amount ){
 		this.overdraft = amount;
 	} //TODO make this use-able
-
+	
+	//the following can replace changeOverdraft and take overdraftLimit as an argument
+	
+	//public void changeOverdraft(double overdraftLimit){
+		//this.overdraft == overdraftLimit;
+	//}
+	
 	public void withdrawMoney(double amount){
 		if (this.openingBalance + this.overdraft < amount) {
 			System.console().writer().println("TEST");
