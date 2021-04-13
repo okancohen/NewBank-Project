@@ -72,7 +72,7 @@ public class Account {
 	}
 
 	public void changeOverdraft(double amount ){
-		this.overdraft = amount;
+		this.overdraft == amount;
 	} //TODO make this use-able
 
 	public void withdrawMoney(double amount){
