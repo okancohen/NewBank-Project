@@ -42,6 +42,7 @@ public class Customer {
 
 			//TODO able to read password
 		else {
+			System.out.println("Your password was successfully created!");
 			this.password = password;
 		}
 	}
