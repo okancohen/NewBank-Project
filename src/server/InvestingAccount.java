@@ -21,6 +21,14 @@ public class InvestingAccount extends Account{
 	//Guaranteed Savings Account Returns = 1%
 	//Low-risk investment portfolio: %2
 	//Medium-risk investment portfolio: %2.75
+	
+	//add preset variables to given return rates as explained in investment types below
+	
+	private double guaranteed;
+	
+	private double lowRisk;
+	
+	private double mediumRisk;
 
 	public InvestingAccount(String investmentType, double startAmount) {
 		super("INVESTMENT", startAmount);
