@@ -1,11 +1,5 @@
 package server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-
 public class Account {
 
 	private String accountName;
@@ -73,13 +67,13 @@ public class Account {
 	}
 
 	public void findOverdraftLimit(double amount){
-		this.overdraftLimit == (this.openingBalance * 1.2);
+		this.overdraftLimit = (this.openingBalance * 1.2);
 	
 	}
 	//add method to let customer know their overdraft potential 
 	
 	public void changeOverdraft(double amount ){
-		this.overdraft == amount;
+		this.overdraft = amount;
 	} //TODO make this use-able
 	
 	//the following can replace changeOverdraft and take overdraftLimit as an argument
