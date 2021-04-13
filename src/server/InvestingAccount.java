@@ -26,9 +26,15 @@ public class InvestingAccount extends Account{
 	
 	private double guaranteed;
 	
+	//guaranteed rate at 1% 0.01
+	
 	private double lowRisk;
 	
+	//low risk rate at 2% 0.02
+	
 	private double mediumRisk;
+	
+	//medium risk at 2.75% 0.0275
 
 	public InvestingAccount(String investmentType, double startAmount) {
 		super("INVESTMENT", startAmount);
