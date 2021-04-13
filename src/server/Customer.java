@@ -30,7 +30,7 @@ public class Customer {
 		boolean hasLowercase = !password.equals(password.toUpperCase());
 
 		if (length < 6 ) {
-			System.out.println("Your password is too short");
+			System.out.println("Your password is too short. Your password must contain six or more characters.");
 		}
 		else if (!hasUpperCase) {
 			System.out.println("Your password needs at least one upper case character");
@@ -42,6 +42,7 @@ public class Customer {
 
 			//TODO able to read password
 		else {
+			System.out.println("Your password was successfully created!");
 			this.password = password;
 		}
 	}
