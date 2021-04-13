@@ -79,7 +79,7 @@ public class Account {
 	//add method to let customer know their overdraft potential 
 	
 	public void changeOverdraft(double amount ){
-		this.overdraft = amount;
+		this.overdraft == amount;
 	} //TODO make this use-able
 	
 	//the following can replace changeOverdraft and take overdraftLimit as an argument
