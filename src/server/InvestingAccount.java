@@ -21,6 +21,20 @@ public class InvestingAccount extends Account{
 	//Guaranteed Savings Account Returns = 1%
 	//Low-risk investment portfolio: %2
 	//Medium-risk investment portfolio: %2.75
+	
+	//add preset variables to given return rates as explained in investment types below
+	
+	private double guaranteed;
+	
+	//guaranteed rate at 1% 0.01
+	
+	private double lowRisk;
+	
+	//low risk rate at 2% 0.02
+	
+	private double mediumRisk;
+	
+	//medium risk at 2.75% 0.0275
 
 	public InvestingAccount(String investmentType, double startAmount) {
 		super("INVESTMENT", startAmount);
@@ -33,6 +47,13 @@ public class InvestingAccount extends Account{
 		this.investmentType = investmentType;
 		this.returnRate = returnRate;
 		this.startAmount =startAmount; // keep for future projections
+	}
+	
+	public setReturnRate(double rate){
+		this.returnRate == rate;
+		
+		//add if-statement or case/s to incorporate the three potential cases around here
+		
 	}
 
 
