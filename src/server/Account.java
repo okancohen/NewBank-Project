@@ -73,6 +73,7 @@ public class Account {
 	}
 
 	public void findOverdraftLimit(double amount){
+		this.overdrftLimit == (this.openingBalance * 1.2)
 	
 	}
 	//add method to let customer know their overdraft potential 
