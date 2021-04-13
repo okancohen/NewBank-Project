@@ -49,11 +49,9 @@ public class InvestingAccount extends Account{
 		this.startAmount =startAmount; // keep for future projections
 	}
 	
-	public setReturnRate(double rate){
-		this.returnRate == rate;
-		
+	public void setReturnRate(double rate){
+		this.returnRate = rate;
 		//add if-statement or case/s to incorporate the three potential cases around here
-		
 	}
 
 
