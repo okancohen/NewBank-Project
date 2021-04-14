@@ -10,6 +10,7 @@ public class Account {
 	private String address;
 	private String phoneNumber;
 	private String emailAddress;
+	private double monthlyIncome
 
 
 	public Account(String accountName){
@@ -81,6 +82,11 @@ public class Account {
 	//public void changeOverdraft(double overdraftLimit){
 		//this.overdraft == overdraftLimit;
 	//}
+	
+	public void setMonthlyIncome(double monthlyIncome){
+		this.monthlyIncome == monthlyIncome;
+	}
+	//FR3-1 monthly income to utilize and extend features with
 	
 	public void withdrawMoney(double amount){
 		if (this.openingBalance + this.overdraft < amount) {
