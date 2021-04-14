@@ -83,8 +83,8 @@ public class Account {
 		//this.overdraft == overdraftLimit;
 	//}
 	
-	public void setMonthlyIncome(double monthlyIncome){
-		this.monthlyIncome == monthlyIncome;
+	public void setMonthlyIncome(double income){
+		this.monthlyIncome == income;
 	}
 	//FR3-1 monthly income to utilize and extend features with
 	
