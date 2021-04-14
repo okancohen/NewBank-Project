@@ -127,6 +127,8 @@ public class Account {
 	public double adviceSavingsGoal(double monthlyIncome){
 		return this.monthlyIncome * 0.3;
 	}
+	
+	//30% percent of monthly income to be saved as a rule-of-thumb advice. See FR3-1: Monthly income extends the user experience in a way that's tailored to each customer individually 
 
 	public String getEmailAddress() {
 		return emailAddress;
