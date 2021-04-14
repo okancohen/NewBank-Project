@@ -121,6 +121,12 @@ public class Account {
 	public double remainderToSavingsGoal(){
 		return this.mySavingsGoal - openingBalance;
 	}
+	
+	//utilize monthly income to get advice on setting savings goal
+	
+	public double adviceSavingsGoal(double income){
+		return this.income * 0.3;
+	}
 
 	public String getEmailAddress() {
 		return emailAddress;
