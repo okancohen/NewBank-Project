@@ -124,8 +124,8 @@ public class Account {
 	
 	//utilize monthly income to get advice on setting savings goal
 	
-	public double adviceSavingsGoal(double income){
-		return this.income * 0.3;
+	public double adviceSavingsGoal(double monthlyIncome){
+		return this.monthlyIncome * 0.3;
 	}
 
 	public String getEmailAddress() {
